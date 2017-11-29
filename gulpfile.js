@@ -26,6 +26,7 @@ const src = {
     ],
     img: {
         perm: './src/img/perm/**/*.{png,jpg,svg,gif}',
+        sprite: './src/img/sprite/**/*.{png,jpg,svg,gif}',
         temp: './src/img/temp/**/*.{png,jpg,svg,gif}',
     },
 };
@@ -50,7 +51,9 @@ const sourcemaps = require('gulp-sourcemaps');
 const autoprefixer = require('gulp-autoprefixer');
 const concat = require('gulp-concat');
 const browserSync = require("browser-sync").create();
+const cleancss = require('gulp-clean-css');
 const cssmin = require('gulp-cssmin');
+const spritesmith = require('gulp.spritesmith');
 const rename = require('gulp-rename');
 const minifyjs = require('gulp-js-minify');
 const md5 = require("gulp-md5-plus");
@@ -180,6 +183,33 @@ gulp.task('build-vendor-prod', () => {
 
     return gulp.src(srcVendor.fonts)
         .pipe(gulp.dest(dist.fonts));
+});
+
+// Sprite
+gulp.task('sprite-images', function () {
+    const spritesConfig = {
+        // retinaSrcFilter: ['retina-images/*@2x.png'],
+        imgName: 'sprite.png',
+        // retinaImgName: 'sprite@2x.png',
+        padding: 20, // Exaggerated for visibility, normal usage is 1 or 2
+        cssName: 'sprite.css',
+        cssTemplate: 'handlebarsStr.css.handlebars',
+        // cssName: 'sprite.scss',
+        // cssTemplate: 'handlebarsInheritance.scss.handlebars'
+    };
+    const spriteData = gulp.src(src.img.sprite) // source path of the sprite images
+        .pipe(spritesmith(spritesConfig));
+    spriteData.img
+        .pipe(buffer())
+        .pipe(imagemin())
+        .pipe(gulp.dest(dist.img.root));
+    // .pipe(gulp.dest(dist.nunjucksImg)); // output path for the sprite
+    spriteData.css
+        .pipe(buffer())
+        .pipe(cleancss({compatibility: 'ie8'}))
+        .pipe(rename({suffix: '.min'}))
+        .pipe(gulp.dest(dist.css));
+    // .pipe(gulp.dest(dist.nunjucksCss));// output path for the CSS
 });
 
 gulp.task('build-css-prod', () => {
