@@ -1,0 +1,27 @@
+{
+  "name": "gulp-build",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:liu-kai-github/gulp-build.git",
+  "author": "liu-kai-github <31062816+liu-kai-github@users.noreply.github.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "browser-sync": "^2.18.13",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.0.0",
+    "gulp-clean": "^0.3.2",
+    "gulp-clean-css": "^3.9.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-cssmin": "^0.2.0",
+    "gulp-html-minify": "^0.0.14",
+    "gulp-imagemin": "^4.0.0",
+    "gulp-js-minify": "^0.0.3",
+    "gulp-md5-plus": "^1.0.3",
+    "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.6.1",
+    "gulp-run-sequence": "^0.3.2",
+    "gulp-sourcemaps": "^2.6.1",
+    "gulp-zip": "^4.0.0",
+    "gulp.spritesmith": "^6.7.0"
+  }
+}
