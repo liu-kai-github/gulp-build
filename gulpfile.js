@@ -238,7 +238,7 @@ gulp.task('build-img-prod', () => {
 });
 
 gulp.task('zip', () => {
-    return gulp.src(dist.root)
+    return gulp.src(dist.root + '**/**')
         .pipe(zip('dist.zip'))
         .pipe(gulp.dest('./'));
 });
