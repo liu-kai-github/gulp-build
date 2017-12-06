@@ -186,7 +186,7 @@ gulp.task('build-vendor-prod', () => {
 });
 
 // Sprite
-gulp.task('sprite-images', function () {
+gulp.task('sprite-images', () => {
     const spritesConfig = {
         // retinaSrcFilter: ['retina-images/*@2x.png'],
         imgName: 'sprite.png',
@@ -238,7 +238,7 @@ gulp.task('build-img-prod', () => {
 });
 
 gulp.task('zip', () => {
-    return gulp.src(dist.root + '**/**')
+    return gulp.src(dist.root + '**/*')
         .pipe(zip('dist.zip'))
         .pipe(gulp.dest('./'));
 });
